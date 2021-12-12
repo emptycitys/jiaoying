@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Inquiry</title>
+<meta charset="utf-8">
+   <!--<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>-->
+   <script src="node_modules/web3/dist/web3.min.js"></script>
+
+
+   <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+   <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+   <!--<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+<meta name="description" content="Place your description here">
+<meta name="keywords" content="put, your, keyword, here">
+<meta name="author" content="Templates.com - website templates provider">
+<link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
+<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+<script type="text/javascript" src="js/jquery-1.4.2.min.js" ></script>
+<script type="text/javascript" src="js/cufon-yui.js"></script>
+<script type="text/javascript" src="js/cufon-replace.js"></script>
+<script type="text/javascript" src="js/Myriad_Pro_300.font.js"></script>
+<script type="text/javascript" src="js/Myriad_Pro_400.font.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
+<!--[if lt IE 7]>
+     <link rel="stylesheet" href="css/ie/ie6.css" type="text/css" media="screen">
+     <script type="text/javascript" src="js/ie_png.js"></script>
+     <script type="text/javascript">
+        ie_png.fix('.png, footer, header nav ul li a, .nav-bg, .list li img, .articles li img');
+     </script>
+<![endif]-->
+<!--[if lt IE 9]>
+  	<script type="text/javascript" src="js/html5.js"></script>
+  <![endif]-->
+</head>
+<body id="page4">
+<div class="wrap">
+   <!-- header -->
+   <header>
+      <div class="container">
+         <h1><a href="index.html">JIAOYING</a></h1>
+         <nav>
+            <ul>
+               <li><a href="index.html" class="m1">Home Page</a></li>
+               <li><a href="journals.html" class="m2">Journal</a></li>
+               <li><a href="conferences.html" class="m3">Conference</a></li>
+               <li class="current"><a href="http://101.42.107.28/index.html" class="m4">Inquiry</a></li>
+               <li><a href="contact-us.html" class="m5">Contact Us</a></li>
+
+            </ul>
+         </nav>
+      </div>
+   </header>
+   <div class="container">
+      <!-- aside -->
+      <aside>
+         <h3>Categories</h3>
+         <ul class="categories">
+            <li><span><a href="journals.html">Journal of Computer and Higher Education</a></span></li>
+            <li><span><a href="conferences.html">Symposium on Information Technology and Education</a></span></li>
+         </ul>
+      </aside>
+      <!-- content -->
+      <section id="content">
+         <div id="banner">
+            <h2>JIAOYING <span>Journal and Conference</span></h2>
+         </div>
+         <div class="inside">
+            <h2>Paper <span>Inquiry</span></h2>
+            <strong>Hash encryption tool:</strong><a href="https://www.onlinehashcrack.com/tools-pdf-hash-extractor.php" style="color: black">https://www.onlinehashcrack.com/tools-pdf-hash-extractor.php</a>
+
+               <form class="bs-example bs-example-form" role="form"style="padding-top: 10px">
+                  <h2>Please enter the paper name:</h2>
+                  <input type="text" class="form-control" id="txt1Value" style="width: 642px">
+               </form>
+            <button class="btn btn-default  btn-success " type="button" id="getValue" style="display:block;margin:10px auto">Submit
+            </button>
+               <form class="bs-example bs-example-form" role="form" id="paper">
+                  <h2>Query results:</h2>
+                     <div class="input-group">
+                        <span class="input-group-addon" style="width: 137px">Paper Hash</span>
+                        <textarea readonly="value" type="text" class="form-control" id="spanValue1" style="width: 505px"></textarea>
+                     </div>
+                     <div class="input-group">
+                        <span class="input-group-addon" style="width: 137px">Paper Reference</span>
+                        <textarea readonly="value" type="text" class="form-control" id="spanValue2" style="width: 505px"></textarea>
+                     </div>
+                     <div class="input-group">
+                        <span class="input-group-addon" style="width: 137px;">Paper Name</span>
+                        <textarea readonly="value" type="text" class="form-control" id="spanValue3" style="width: 505px"></textarea>
+                     </div>
+               </form>
+            <div class="row" style="padding-top: 10px">
+               <div class="col-lg-12 ">
+                  <div id="msg" class="alert alert-danger" ></div>
+               </div>
+            </div>
+         </div>
+      </section>
+   </div>
+
+</div>
+<!-- footer -->
+<footer>
+   <div class="container">
+      <div class="inside">
+         <div class="wrapper">
+            <div class="fleft">Email: <span>site@jiaoying.org</span></div>
+            <div class="aligncenter">&copy; Copyright &copy; 2019. JIAOYING All rights reserved.</div>
+         </div>
+      </div>
+   </div>
+</footer>
+<script>
+   if(typeof web3 !== 'undefined'){
+      web3 = new Web3(web3.currentProvider);
+   }else {
+      web3 = new Web3(new Web3.providers.HttpProvider("http://101.42.107.28:8070"));
+   }
+
+   //读取合约的ABI信息
+   var data = $.ajax({ url: "./Storage.json", async: false }).responseText;
+
+   //创建合约对象，使用的合约地址是我们刚创建的合约地址
+   var contract = new web3.eth.Contract(JSON.parse(data), '0x1DF0dD7e4777374f7b7bdb5dA9f6e0f9Fcfbacd8');
+
+
+   // 获取事件对象
+   $("#getValue").click(function () {
+
+      contract.methods.getEvidence($("#txt1Value").val()).call({from:'0x91A9Bd6a545C5d04005dc8Cf8A579563d44cC390'},function (error,result) {
+         console.log(result);
+
+         if(result[2] == ""){
+            $("#spanValue1").html("");
+            $("#spanValue2").html("");
+            $("#spanValue3").html("");
+            $("#msg").text("Inquiry Fail,please check your input!");
+         }
+         else if(result[2] == $("#txt1Value").val()) {
+            $("#spanValue1").html(result[0]);
+            $("#spanValue2").html(result[1]);
+            $("#spanValue3").html(result[2]);
+            $("#msg").text("Inquiry Success！");
+         }else
+
+            $("#msg").text("Inquiry Fail,please check your input!");
+
+
+      });
+
+   });
+
+
+</script>
+
+</body>
+</html>
